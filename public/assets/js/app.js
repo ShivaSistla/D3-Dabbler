@@ -96,22 +96,6 @@ d3.csv('/assets/data/data.csv')
         const xScale = d3.scaleLinear()
             .domain([0, 20])
             .range([0, chartWidth])
-
-        // Create axes for Svg
-        const yAxis_func = d3.axisLeft(yScale);
-        const xAxis_func = d3.axisBottom(xScale);
-
-        // set x to the bottom of the chart
-        let xAxis_g = svg.append('g')
-            .attr('id', 'xaxis')
-            .attr('transform', `translate(0, ${chartHeight})`)
-            .call(xAxis_func);
-
-        // Assign YAxis to variable so we can update it later
-        svg.append('g')
-            .attr('id', 'yaxis')
-            .call(yAxis_func);
-
         // Create the circles using data binding
         const circleGroup = svg.selectAll('circle')
             .data(data)
@@ -133,7 +117,24 @@ d3.csv('/assets/data/data.csv')
          .attr('font-size','10px')
          .attr('text-anchor','middle')
          .text(d => d['abbr']);
-      //   .attr('text', d => d['abbr']);
+         
+        // Create axes for Svg
+        const yAxis_func = d3.axisLeft(yScale);
+        const xAxis_func = d3.axisBottom(xScale);
+
+        // set x to the bottom of the chart
+        let xAxis_g = svg.append('g')
+            .attr('id', 'xaxis')
+            .attr('transform', `translate(0, ${chartHeight})`)
+            .call(xAxis_func);
+
+        // Assign YAxis to variable so we can update it later
+        svg.append('g')
+            .attr('id', 'yaxis')
+            .call(yAxis_func);
+
+
+   
 
         labelsGroup.selectAll('text')
             .on('click', function() {
